@@ -5,8 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/ß
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run setup-java with the cache for maven
+        uses: ./.github/workflows/ß
         with:
           java-version: '20'
-      - run: mvn package
+        run: mvn package
