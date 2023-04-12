@@ -15,5 +15,5 @@ jobs:
       - name: Build with Maven
         run : | 
           ls
-          cd /.github/demo
+          cd /demo
           mvn package
