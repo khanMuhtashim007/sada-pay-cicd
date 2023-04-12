@@ -8,7 +8,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run setup-java with the cache for maven
-        uses: ./.github/workflows/ß
         with:
           java-version: '20'
-        run: mvn package
+        run : | 
+          cd ./.github/demo
+          mvn package
