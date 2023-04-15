@@ -17,7 +17,8 @@ jobs:
         run : | 
           cd demo/
           mvn package
-      - name: Sonar Analysis
-        run: |
-          cd demo/
-          mvn sonar:sonar -Dsonar.host.url=http://sonarcloud.io -Dsonar.login=the-generated-token
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=khanMuhtashim007_sada-pay-cicd
