@@ -1,6 +1,9 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} Running Demo Application
-on: [push]
+on:
+  push:
+    tags:        
+      - '*'  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
       - name: Maven Build
         run : | 
           cd demo/
-          mvn package
+          mvn clean package -Djar.finalName=custom-jar-name
       - name: Maven Cache packages
         uses: actions/cache@v2
         with:
@@ -41,7 +44,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Docker Login
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Set env
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
