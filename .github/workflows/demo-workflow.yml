@@ -31,4 +31,6 @@ jobs:
           cd demo/
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=khanMuhtashim007_sada-pay-cicd
       - name: Maven Verify
-        run: mvn --batch-mode --update-snapshots verify
+        run: |
+          cd demo/
+          mvn --batch-mode --update-snapshots verify
