@@ -34,8 +34,14 @@ jobs:
         run: |
           cd demo/
           mvn test
-      - name: Wait for approval
-        uses: actions/manual-approval@v1
-        with:
-          approvers: khanMuhtashim007
-          minimum-approvals: 1
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker Login
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
