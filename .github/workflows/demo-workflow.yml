@@ -53,4 +53,4 @@ jobs:
       - name: Docker Build
         run: |
           cd demo/
-          docker build . -t muhtashim/muhtashim-mave:${{ env.RELEASE_VERSION }}
+          docker build . -t muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
