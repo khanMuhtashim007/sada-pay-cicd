@@ -20,4 +20,4 @@ jobs:
       - name: Sonar Analysis
         run: |
           cd demo/
-          mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=the-generated-token
+          mvn sonar:sonar -Dsonar.host.url=http://sonarcloud.io -Dsonar.login=the-generated-token
