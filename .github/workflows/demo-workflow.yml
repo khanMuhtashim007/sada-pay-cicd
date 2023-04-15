@@ -34,3 +34,8 @@ jobs:
         run: |
           cd demo/
           mvn test
+      - name: Wait for approval
+        uses: actions/manual-approval@v1
+        with:
+          approvers: khanMuhtashim007
+          minimum-approvals: 1
