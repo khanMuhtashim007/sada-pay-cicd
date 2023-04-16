@@ -39,7 +39,7 @@ jobs:
     #       key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
     #       restore-keys: ${{ runner.os }}-m2
   deploy:
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
     runs-on: ubuntu-latest
     needs: build
     steps:
