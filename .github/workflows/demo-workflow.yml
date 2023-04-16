@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: muhtashim/demo-app:${{ env.RELEASE_VERSION }}
+          tags: muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
           file: demo/Dockerfile
         # run: |
         #   cd demo/
