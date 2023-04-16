@@ -71,6 +71,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Run Application
         run: |
-          docker pull muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
+          docker pull demo-app:${{ env.RELEASE_VERSION }}
 
 
