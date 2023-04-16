@@ -55,13 +55,12 @@ jobs:
         run: |
           cd demo/
           docker build . -t muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
+      - name: Docker Push
+        run: |
           docker push muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
-      # - name: Docker Push
-      #   run: |
-      #     docker push muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
       - name: Run Application
         run: |
-          docker run -itd -p 8080:8080 muhtashim/demo-app:${{ env.RELEASE_VERSION }}
+          docker run -itd -p 8080:8080 muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
   deploy_prod:
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
@@ -77,6 +76,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Run Application
         run: |
-          docker run -itd -p 8080:8080 muhtashim/demo-app:${{ env.RELEASE_VERSION }}
+          docker run -itd -p 8080:8080 muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
 
 
