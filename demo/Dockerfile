@@ -1,4 +1,4 @@
-FROM maven:3.8.5 AS build
+FROM maven:4.0.0 AS build
 WORKDIR /demo
 COPY pom.xml pom.xml
 COPY src src
