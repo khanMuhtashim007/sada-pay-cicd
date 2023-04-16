@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: demo-application
 run-name: ${{ github.actor }} Running Demo Application
 on: 
   push:
@@ -63,4 +63,3 @@ jobs:
         run: |
           cd demo/
           docker build . -t muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
-          docker push muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
