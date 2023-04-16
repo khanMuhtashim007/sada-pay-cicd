@@ -47,11 +47,6 @@ jobs:
       #     echo $RELEASE_VERSION
       #     echo ${{ env.RELEASE_VERSION }}
       - name: Docker Build
-        # uses: docker/build-push-action@v4
-        # with:
-        #   push: true
-        #   tags: muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
-        #   file: demo/Dockerfile
         run: |
           cd demo/
           docker build . -t muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
@@ -76,6 +71,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Run Application
         run: |
-          docker run -itd -p 8080:8080 muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
+          docker pull muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
 
 
