@@ -1,4 +1,4 @@
-FROM maven:4.0.0 AS build
+FROM maven:3.9.1-eclipse-temurin-20 AS build
 WORKDIR /demo
 COPY pom.xml pom.xml
 COPY src src
