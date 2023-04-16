@@ -1,7 +1,6 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} Running Demo Application
-on:
-  release: 
+on: release
 jobs:
   build:
     runs-on: ubuntu-latest
