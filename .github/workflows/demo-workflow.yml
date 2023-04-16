@@ -16,16 +16,6 @@ jobs:
           java-version: '20'
           distribution: 'temurin'
           cache: maven
-      - name: Maven Build
-        run : | 
-          cd demo/
-          mvn clean package -Djar.finalName=custom-jar-name
-      - name: Maven Cache packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
       - name: Sonar Analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,6 +27,16 @@ jobs:
         run: |
           cd demo/
           mvn test
+      - name: Maven Build
+        run : | 
+          cd demo/
+          mvn clean package -Djar.finalName=custom-jar-name
+      - name: Maven Cache packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
   deploy:
     if: startsWith(github.event.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
