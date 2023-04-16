@@ -8,38 +8,38 @@ jobs:
   build:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up JDK 20
-        uses: actions/setup-java@v3
-        with:
-          java-version: '20'
-          distribution: 'temurin'
-          cache: maven
-      - name: Sonar Analysis
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          cd demo/
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=khanMuhtashim007_sada-pay-cicd
-      - name: Maven Test
-        run: |
-          cd demo/
-          mvn test
-      - name: Maven Build
-        run : | 
-          cd demo/
-          mvn clean package -Djar.finalName=custom-jar-name
-      - name: Maven Cache packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v3
+    #   - name: Set up JDK 20
+    #     uses: actions/setup-java@v3
+    #     with:
+    #       java-version: '20'
+    #       distribution: 'temurin'
+    #       cache: maven
+    #   - name: Sonar Analysis
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #     run: |
+    #       cd demo/
+    #       mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=khanMuhtashim007_sada-pay-cicd
+    #   - name: Maven Test
+    #     run: |
+    #       cd demo/
+    #       mvn test
+    #   - name: Maven Build
+    #     run : | 
+    #       cd demo/
+    #       mvn clean package -Djar.finalName=custom-jar-name
+    #   - name: Maven Cache packages
+    #     uses: actions/cache@v2
+    #     with:
+    #       path: ~/.m2
+    #       key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+    #       restore-keys: ${{ runner.os }}-m2
   deploy:
-    if: github.ref == 'refs/tags/v1.0.19'
+    # if: github.ref == 'refs/tags/v1.0.19'
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -51,9 +51,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Set Release Version
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Docker Build & Push
         run: |
-          cd demo/
-          docker build . -t muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
-          docker push muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo $GITHUB_ENV
+      # - name: Docker Build & Push
+      #   run: |
+      #     cd demo/
+      #     docker build . -t muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
+      #     docker push muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
