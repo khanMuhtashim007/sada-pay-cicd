@@ -47,15 +47,15 @@ jobs:
       #     echo $RELEASE_VERSION
       #     echo ${{ env.RELEASE_VERSION }}
       - name: Docker Build
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
-          file: demo/Dockerfile
-        # run: |
-        #   cd demo/
-        #   docker build . -t muhtashim/demo-app:${{ env.RELEASE_VERSION }}
-        #   docker push muhtashim/demo-app:${{ env.RELEASE_VERSION }}
+        # uses: docker/build-push-action@v4
+        # with:
+        #   push: true
+        #   tags: muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
+        #   file: demo/Dockerfile
+        run: |
+          cd demo/
+          docker build . -t muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
+          docker push muhtashimkhan/demo-app:${{ env.RELEASE_VERSION }}
       # - name: Docker Push
       #   run: |
       #     docker push muhtashim/muhtashim-maven:${{ env.RELEASE_VERSION }}
